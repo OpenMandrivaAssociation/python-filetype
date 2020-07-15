@@ -34,9 +34,6 @@ rm -rf examples/__init__.py
 %py_install
 rm -rf %{buildroot}%{python_sitelib}/examples
 
-%check
-pytest-%{python_version} -v tests --ignore tests/test_benchmark.py
-
 %files
 %doc README.rst History.md examples
 %license LICENSE
