@@ -7,7 +7,7 @@ Summary:        Infer file type and MIME type of any file/buffer
 
 License:        MIT
 URL:            https://github.com/h2non/filetype.py
-Source0:        %{url}/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
+Source0:        %{url}/archive/v%{version}/%{pypi_name}.py-%{version}.tar.gz
 
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
