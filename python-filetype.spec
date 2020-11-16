@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.7
-Release:        1
+Release:        2
 Summary:        Infer file type and MIME type of any file/buffer
 
 License:        MIT
@@ -11,7 +11,7 @@ Source0:        %{url}/archive/v%{version}/%{pypi_name}.py-%{version}.tar.gz
 
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
-Buildrequires:  python-pytest
+BuildRequires:  python-pytest
 
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
