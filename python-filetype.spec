@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.7
-Release:        3
+Release:        4
 Summary:        Infer file type and MIME type of any file/buffer
 
 License:        MIT
