@@ -1,41 +1,41 @@
-%global pypi_name filetype
+%define module filetype
+%bcond tests 1
 
-Name:           python-%{pypi_name}
-Version:        1.0.7
-Release:        5
-Summary:        Infer file type and MIME type of any file/buffer
+Name:		python-filetype
+Version:	1.2.0
+Release:	1
+Summary:	Infer file type and MIME type of any file/buffer
+License:	MIT
+Group:		Development/Python
+URL:		https://github.com/h2non/filetype.py
+Source0:	%{URL}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-License:        MIT
-URL:            https://github.com/h2non/filetype.py
-Source0:        %{url}/archive/v%{version}/%{pypi_name}.py-%{version}.tar.gz
-
-BuildRequires:  python-devel
-BuildRequires:  python-setuptools
-BuildRequires:  python-pytest
-
-%{?python_provide:%python_provide python3-%{pypi_name}}
-
+BuildSystem:	python
 BuildArch:      noarch
+BuildRequires:	pkgconfig(python3)
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
+%if %{with tests}
+BuildRequires:	python%{pyver}dist(pytest)
+%endif
 
 %description
 Small and dependency free Python package to infer file type and MIME type
 checking the magic numbers signature of a file or buffer.
 
-
-%prep
-%setup -q -n %{pypi_name}.py-%{version}
-sed -i -e '/^#!\//, 1d' examples/*.py
-rm -rf examples/__init__.py
-
-%build
-%py_build
-
-%install
-%py_install
-rm -rf %{buildroot}%{python_sitelib}/examples
+%if %{with tests}
+%check
+export CI=true
+export PYTHONPATH="%{buildroot}%{python_sitelib}:${PWD}"
+skiptests+="not test_guess_memoryview and not test_guess_extension_memoryview "
+skiptests+="and not test_guess_mime_memoryview and not test_guess_zstd"
+pytest tests/ --ignore tests/test_benchmark.py -k "$skiptests"
+%endif
 
 %files
 %doc README.rst History.md examples
 %license LICENSE
-%{python_sitelib}/%{pypi_name}/
-%{python_sitelib}/%{pypi_name}-%{version}-py*.egg-info
+%{_bindir}/%{module}
+%{python_sitelib}/%{module}
+%{python_sitelib}/%{module}-%{version}-py%{pyver}.egg-info
