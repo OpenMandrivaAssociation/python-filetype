@@ -3,7 +3,7 @@
 
 Name:		python-filetype
 Version:	1.2.0
-Release:	1
+Release:	2
 Summary:	Infer file type and MIME type of any file/buffer
 License:	MIT
 Group:		Development/Python
